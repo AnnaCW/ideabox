@@ -16,13 +16,15 @@
     </thead>
     <tbody>
       <% @ideas.each do |idea| %>
-      <tr>
-        <td><%= idea.title %></td>
-        <td><%= idea.body %></td>
-        <td><%= idea.quality %></td>
-        <td><%= idea.formatted_created_at %></td>
-        <td><%= idea.formatted_updated_at %></td>
-      </tr>
+      <!-- <div class="idea"  style="display:none;"> -->
+        <tr id="idea-<%=idea.id%>">
+          <td><%= idea.title %></td>
+          <td><%= idea.truncated_body%></td>
+          <td><%= idea.quality %></td>
+          <td><%= idea.formatted_created_at %></td>
+          <td><%= idea.formatted_updated_at %></td>
+        </tr>
+      <!-- </div> -->
       <% end %>
     </tbody>
   </table>
