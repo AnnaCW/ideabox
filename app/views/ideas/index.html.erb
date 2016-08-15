@@ -1,0 +1,32 @@
+<div class="container">
+
+  <h1>IdeaBox</h1>
+  <h3>Because your ideas need a box</h3>
+
+
+  <table class="table ideas">
+    <thead>
+      <tr>
+        <td>Title</td>
+        <td>Body</td>
+        <td>Quality</td>
+        <td>Date Created</td>
+        <td>Last Updated</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @ideas.each do |idea| %>
+      <!-- <div class="idea"  style="display:none;"> -->
+        <tr id="idea-<%=idea.id%>">
+          <td><%= idea.title %></td>
+          <td><%= idea.truncated_body%></td>
+          <td><%= idea.quality %></td>
+          <td><%= idea.formatted_created_at %></td>
+          <td><%= idea.formatted_updated_at %></td>
+        </tr>
+      <!-- </div> -->
+      <% end %>
+    </tbody>
+  </table>
+
+</div>
