@@ -10,23 +10,24 @@
         <td>Title</td>
         <td>Body</td>
         <td>Quality</td>
-        <td>Date Created</td>
-        <td>Last Updated</td>
       </tr>
     </thead>
-    <tbody>
-      <% @ideas.each do |idea| %>
-      <!-- <div class="idea"  style="display:none;"> -->
-        <tr id="idea-<%=idea.id%>">
-          <td><%= idea.title %></td>
-          <td><%= idea.truncated_body%></td>
-          <td><%= idea.quality %></td>
-          <td><%= idea.formatted_created_at %></td>
-          <td><%= idea.formatted_updated_at %></td>
-        </tr>
-      <!-- </div> -->
-      <% end %>
+    <tbody class = "ideas-listing">
+      <!-- result of get to /ideas -->
     </tbody>
   </table>
+
+  <form class="add-new-idea">
+    <h4>Add New Idea</h4>
+    <div class="form-group">
+      <label for='title'>Title</label>
+      <textarea class='form-control' id='titleTextarea' rows='1'></textarea>
+    </div>
+    <div class="form-group">
+      <label for='body'>Body</label>
+      <textarea class='form-control' id='bodyTextarea' rows='10'></textarea>
+    </div>
+    <button class='btn btn-success' id='save-button'>Save</button>
+  </form>
 
 </div>
