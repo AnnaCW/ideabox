@@ -1,7 +1,7 @@
 require "rails_helper"
 
 feature "user views ideas" do
-  scenario "user sees all ideas and attributes" do
+  scenario "user sees all ideas and attributes", js: true do
     idea_1 = create(:idea, title: "Idea 1 Title",
                            body: "Idea 1 Body",
                            created_at: "2016-08-01 09:10:00"
