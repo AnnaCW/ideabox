@@ -6,8 +6,8 @@ $(document).ready(function(){
 
 function displayIdea(idea) {
   return $('<tr id=' + idea.id + '>' +
-  '<td>' + idea.title + '</td>' +
-  '<td>' + jQuery.trim(idea.body).split(" ").slice(0, 100).join(" ") + '</td>' +
+  '<td class=title>' + idea.title + '</td>' +
+  '<td class=body>' + jQuery.trim(idea.body).split(" ").slice(0, 100).join(" ") + '</td>' +
   '<td class=quality>' + idea.quality + '</td>' +
   '<td>' +
     '<button class="btn btn-xs btn-success thumbs-up-button" data-target=' + idea.id + '>Thumbs Up</button>' +
@@ -16,6 +16,16 @@ function displayIdea(idea) {
   '<td><button class="btn btn-danger delete-button" data-target=' + idea.id + '>Delete</button>' +
   '</tr>');
 };
+
+// function ideaTemplate(){
+  // create the html
+  // truncate the body
+  // return the html that is created
+// }
+
+// function trimBody(){
+  // jQuery.trim(idea.body).split(" ").slice(0, 100).join(" ")
+// }
 
   $("#save-button").on('click', function(){
     console.log("clicked")
@@ -29,8 +39,8 @@ function displayIdea(idea) {
       data: {idea: { title: title, body: body} },
       success: function(idea){
         $(".ideas-listing").prepend('<tr id=' + idea.id + '>' +
-        '<td>' + idea.title + '</td>' +
-        '<td>' + jQuery.trim(idea.body).split(" ").slice(0, 100).join(" ") + '</td>' +
+        '<td class=title>' + idea.title + '</td>' +
+        '<td class=body>' + jQuery.trim(idea.body).split(" ").slice(0, 100).join(" ") + '</td>' +
         '<td class="quality">' + idea.quality + '</td>' +
         '<td>' +
           '<button class="btn btn-xs btn-success thumbs-up-button" data-target=' + idea.id + '>Thumbs Up</button>' +
@@ -48,24 +58,28 @@ function displayIdea(idea) {
      return false;
   })
 
-  $('.ideas-listing').delegate('.delete-button', 'click', function() {
+  $('.ideas-listing').delegate('.delete-button', 'click', function(e) {
     var ideaId = $(this).data("target")
     var idea = $(this).parent().parent()
     console.log(ideaId)
+    deleteIdea(ideaId, idea);
+  })
 
+  function deleteIdea(ideaId, idea){
     $.ajax({
       url: "/api/v1/ideas/" + ideaId + ".json",
       method: "DELETE",
       dataType: "JSON",
       success: function(deleteIdea){
-        console.log("successfully deleted");
-        $(idea).remove()
-      },
-      error: function(xhr) {
-       console.log(xhr.responseText)
-     }
+        removeIdeaFromDOM(idea);
+      }
     });
-  })
+  }
+
+  function removeIdeaFromDOM(idea){
+    console.log("successfully deleted");
+    $(idea).remove()
+  }
 
   var increaseQuality = {
     swill: 'plausible',
