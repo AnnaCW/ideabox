@@ -6,15 +6,6 @@ class IdeasController < ApplicationController
     respond_with ideas
   end
 
-  def create
-    idea = Idea.new(idea_params)
-    if idea.save
-      respond_with idea
-    else
-      respond_with status: 422
-    end
-  end
-
   private
 
   def idea_params
