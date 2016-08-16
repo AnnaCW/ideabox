@@ -5,12 +5,16 @@ $(document).ready(function(){
   });
 
 function displayIdea(idea) {
-  return $('<tr><td>' + idea.title + '</td>' +
+  return $('<tr id=' + idea.id + '>' +
+  '<td>' + idea.title + '</td>' +
   '<td>' + jQuery.trim(idea.body).split(" ").slice(0, 100).join(" ") + '</td>' +
-  '<td>' + idea.quality + '</td></tr>');
+  '<td>' + idea.quality + '</td>'  +
+  '<td><button class="btn btn-danger delete-button" data-target=' + idea.id + '>Delete</button>' +
+  '</tr>');
 };
 
   $("#save-button").on('click', function(){
+    console.log("clicked")
     var title = $("#titleTextarea").val()
     var body = $("#bodyTextarea").val();
 
@@ -20,9 +24,12 @@ function displayIdea(idea) {
       dataType: "JSON",
       data: {idea: { title: title, body: body} },
       success: function(idea){
-        $(".ideas-listing").prepend('<tr><td>' + idea.title + '</td>' +
+        $(".ideas-listing").prepend('<tr id=' + idea.id + '>' +
+        '<td>' + idea.title + '</td>' +
         '<td>' + jQuery.trim(idea.body).split(" ").slice(0, 100).join(" ") + '</td>' +
-        '<td>' + idea.quality + '</td></tr>');
+        '<td>' + idea.quality + '</td>' +
+        '<td><button class="btn btn-danger delete-button" data-target=' + idea.id + '>Delete</button>' +
+        '</tr>');
         $("#titleTextarea").val("");
         $("#bodyTextarea").val("");
       },
@@ -31,6 +38,26 @@ function displayIdea(idea) {
      }
     });
      return false;
+  })
+
+  $('.ideas-listing').delegate('.delete-button', 'click', function() {
+    var ideaId = $(this).data("target")
+    var idea = $(this).parent().parent()
+    console.log(ideaId)
+
+    $.ajax({
+      url: "/api/v1/ideas/" + ideaId + ".json",
+      method: "DELETE",
+      dataType: "JSON",
+      success: function(deleteIdea){
+        console.log("successfully deleted");
+        $(idea).remove()
+      },
+      error: function(xhr) {
+       console.log(xhr.responseText)
+     }
+    });
+
   })
 
 });
