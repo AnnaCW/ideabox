@@ -20,10 +20,6 @@ function displayIdea(idea) {
   '</tr>');
 };
 
-// function trimBody(){
-  // jQuery.trim(idea.body).split(" ").slice(0, 100).join(" ")
-// }
-
   $("#save-button").on('click', function(){
     console.log("clicked")
     var title = $("#titleTextarea").val()
@@ -62,11 +58,6 @@ function displayIdea(idea) {
         removeIdeaFromDOM(idea);
       }
     });
-  }
-
-  function removeIdeaFromDOM(idea){
-    console.log("successfully deleted");
-    $(idea).remove()
   }
 
   var increaseQuality = {
@@ -125,3 +116,12 @@ function displayIdea(idea) {
     });
   })
 });
+
+function removeIdeaFromDOM(idea){
+  console.log("successfully deleted");
+  $(idea).remove()
+}
+
+function trimBody(body){
+  return jQuery.trim(body).split(" ").slice(0, 100).join(" ")
+}
