@@ -10,7 +10,7 @@ function displayIdea(idea) {
   '<td class=hidden-title style=display:none><textarea class=form-control>' + idea.title + '</textarea></td>' +
 
   '<td class=body>' + jQuery.trim(idea.body).split(" ").slice(0, 100).join(" ") + '</td>' +
-  '<td class=full-body style=display:none;>' + idea.body + '</td>' +
+  '<td class=full-body style=display:none;><textarea class=form-control>' + idea.body + '</textarea></td>' +
   '<td class=quality>' + idea.quality + '</td>' +
   '<td>' +
     '<button class="btn btn-xs btn-success thumbs-up-button" data-target=' + idea.id + '>Thumbs Up</button>' +

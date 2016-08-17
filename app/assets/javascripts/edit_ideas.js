@@ -7,25 +7,20 @@ function editIdeaTitle() {
   $('.ideas-listing').on('click', '.title', function(e) {
     $('.ideas-listing').off('click', '.title');
       var ideaTitle = $(this).parent().find(".title").text();
-      // $(this).parent().find(".title").html("<textarea class='form-control'>" + ideaTitle + "</textarea>");
 
        var displayedTitle = $(this).parent().find(".title");
        var hiddenTitleTextArea = $(this).parent().find(".hidden-title").find("textarea");
 
        var hiddenTitle = $(this).parent().find(".hidden-title");
-       hiddenTitleTextArea.addClass("edited");
+       hiddenTitleTextArea.addClass("edited-title");
        hiddenTitle.toggle("style");
        displayedTitle.hide();
 
-
-      // var ideaTitleArea = $(this).parent().find(".title").find("textarea");
-      // ideaTitleArea.addClass("edited");
-
       $(".ideas-listing").on('click', function(event) {
-        if(!$(event.target).is(".edited") ) {
+        if(!$(event.target).is(".edited-title") ) {
 
-          var ideaId = $(".edited").parent().parent().attr("id");
-          var updatedTitle = $(this).parent().find(".hidden-title").find("textarea").val();
+          var ideaId = $(".edited-title").parent().parent().attr("id");
+          var updatedTitle = $(".edited-title").val();
 
           var data = { title: updatedTitle };
 
@@ -36,12 +31,11 @@ function editIdeaTitle() {
                 data: data,
                 success: function(updatedIdea){
                   console.log("updated!");
-                  // $(".edited").parent().html("<td class='title'>" + updatedTitle + "</td>");
-                  $(".edited").removeClass("edited");
+                  $(".edited-title").removeClass("edited-title");
                   hiddenTitle.toggle("style");
 
                   displayedTitle.show();
-                  displayedTitle.text(updatedIdea.title);
+                  displayedTitle.text(updatedTitle);
 
 
                   },
@@ -54,21 +48,23 @@ function editIdeaTitle() {
   })
  }
 
-
 function editIdeaBody() {
   $('.ideas-listing').on('click', '.body', function() {
     $('.ideas-listing').off('click', '.body');
       var ideaBody = $(this).parent().find(".full-body").text();
-      $(this).parent().find(".body").html("<textarea class='form-control'>" + ideaBody + "</textarea>");
+      var displayedBody = $(this).parent().find(".body");
+      var hiddenBodyTextArea = $(this).parent().find(".full-body").find("textarea");
+      var hiddenBody = $(this).parent().find(".full-body")
 
-      var ideaBodyArea = $(this).parent().find(".body").find("textarea");
-      ideaBodyArea.addClass("edited");
+      hiddenBodyTextArea.addClass("edited-body");
+      hiddenBody.toggle("style");
+      displayedBody.hide();
 
       $(".ideas-listing").on('click', function(event) {
-        if(!$(event.target).is(".edited") ) {
+        if(!$(event.target).is(".edited-body") ) {
 
-          var ideaId = $(".edited").parent().parent().attr("id");
-          var updatedBody = $(this).parent().find(".body").find("textarea").val();
+          var ideaId = $(".edited-body").parent().parent().attr("id");
+          var updatedBody = $(".edited-body").val();
 
           var data = { body: updatedBody };
 
@@ -79,8 +75,10 @@ function editIdeaBody() {
                 data: data,
                 success: function(updatedIdea){
                   console.log("updated!");
-                  // $(".edited").parent().html("<td class='body'>" + updatedBody + "</td>");
-                  $(".edited").removeClass("edited");
+                  $(".edited-body").removeClass("edited-body");
+                  hiddenBody.toggle("style");
+                  displayedBody.show();
+                  displayedBody.text(jQuery.trim(updatedBody).split(" ").slice(0, 100).join(" "))
 
                   },
                 error: function(xhr) {
@@ -91,32 +89,3 @@ function editIdeaBody() {
     })
    })
   }
-
-  // function updateIdeaTitle(ideaTitle) {
-  //   $(document).click(function(event) {
-  //     if(!$(event.target).is(".edited") ) {
-  //     // console.log("win");
-  //     // }
-  //     // $('.ideas-listing').on('click', '.body', function() {
-  //     // var updatedTitle = $(this).parent().find(".title").text();
-  //     // var ideaId = $(this).parent().find("id");
-  //     console.log(ideaTitle);
-  //     // var updatedBody = $(this).parent().find(".full-body").text();
-  //
-  //     var data = { title: updatedTitle };
-  //
-  //     $.ajax({
-  //       url: "/api/v1/ideas/" + ideaId + ".json",
-  //       method: "PATCH",
-  //       dataType: "JSON",
-  //       data: data,
-  //       success: function(updatedIdea){
-  //         console.log("updated!");
-  //       },
-  //         error: function(xhr) {
-  //           console.log(xhr.responseText)
-  //       }
-  //       });
-  //     }
-  //   })
-  // }
