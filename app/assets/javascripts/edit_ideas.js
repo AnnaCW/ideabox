@@ -7,16 +7,25 @@ function editIdeaTitle() {
   $('.ideas-listing').on('click', '.title', function(e) {
     $('.ideas-listing').off('click', '.title');
       var ideaTitle = $(this).parent().find(".title").text();
-      $(this).parent().find(".title").html("<textarea class='form-control'>" + ideaTitle + "</textarea>");
+      // $(this).parent().find(".title").html("<textarea class='form-control'>" + ideaTitle + "</textarea>");
 
-      var ideaTitleArea = $(this).parent().find(".title").find("textarea");
-      ideaTitleArea.addClass("edited");
+       var displayedTitle = $(this).parent().find(".title");
+       var hiddenTitleTextArea = $(this).parent().find(".hidden-title").find("textarea");
+
+       var hiddenTitle = $(this).parent().find(".hidden-title");
+       hiddenTitleTextArea.addClass("edited");
+       hiddenTitle.toggle("style");
+       displayedTitle.hide();
+
+
+      // var ideaTitleArea = $(this).parent().find(".title").find("textarea");
+      // ideaTitleArea.addClass("edited");
 
       $(".ideas-listing").on('click', function(event) {
         if(!$(event.target).is(".edited") ) {
 
           var ideaId = $(".edited").parent().parent().attr("id");
-          var updatedTitle = $(this).parent().find(".title").find("textarea").val();
+          var updatedTitle = $(this).parent().find(".hidden-title").find("textarea").val();
 
           var data = { title: updatedTitle };
 
@@ -29,6 +38,10 @@ function editIdeaTitle() {
                   console.log("updated!");
                   // $(".edited").parent().html("<td class='title'>" + updatedTitle + "</td>");
                   $(".edited").removeClass("edited");
+                  hiddenTitle.toggle("style");
+
+                  displayedTitle.show();
+                  displayedTitle.text(updatedIdea.title);
 
 
                   },

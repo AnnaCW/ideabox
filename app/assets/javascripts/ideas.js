@@ -7,6 +7,8 @@ $(document).ready(function(){
 function displayIdea(idea) {
   return $('<tr class=form-group id=' + idea.id + '>' +
   '<td class=title>' + idea.title + '</td>' +
+  '<td class=hidden-title style=display:none><textarea class=form-control>' + idea.title + '</textarea></td>' +
+
   '<td class=body>' + jQuery.trim(idea.body).split(" ").slice(0, 100).join(" ") + '</td>' +
   '<td class=full-body style=display:none;>' + idea.body + '</td>' +
   '<td class=quality>' + idea.quality + '</td>' +
