@@ -5,9 +5,12 @@ $(document).ready(function(){
   });
 
 function displayIdea(idea) {
-  return $('<tr id=' + idea.id + '>' +
+  return $('<tr class=form-group id=' + idea.id + '>' +
   '<td class=title>' + idea.title + '</td>' +
+  '<td class=hidden-title style=display:none><textarea class=form-control>' + idea.title + '</textarea></td>' +
+
   '<td class=body>' + jQuery.trim(idea.body).split(" ").slice(0, 100).join(" ") + '</td>' +
+  '<td class=full-body style=display:none;><textarea class=form-control>' + idea.body + '</textarea></td>' +
   '<td class=quality>' + idea.quality + '</td>' +
   '<td>' +
     '<button class="btn btn-xs btn-success thumbs-up-button" data-target=' + idea.id + '>Thumbs Up</button>' +
@@ -16,12 +19,6 @@ function displayIdea(idea) {
   '<td><button class="btn btn-danger delete-button" data-target=' + idea.id + '>Delete</button>' +
   '</tr>');
 };
-
-// function ideaTemplate(){
-  // create the html
-  // truncate the body
-  // return the html that is created
-// }
 
 // function trimBody(){
   // jQuery.trim(idea.body).split(" ").slice(0, 100).join(" ")
@@ -37,20 +34,11 @@ function displayIdea(idea) {
       method: "POST",
       dataType: "JSON",
       data: {idea: { title: title, body: body} },
-      success: function(idea){
-        $(".ideas-listing").prepend('<tr id=' + idea.id + '>' +
-        '<td class=title>' + idea.title + '</td>' +
-        '<td class=body>' + jQuery.trim(idea.body).split(" ").slice(0, 100).join(" ") + '</td>' +
-        '<td class="quality">' + idea.quality + '</td>' +
-        '<td>' +
-          '<button class="btn btn-xs btn-success thumbs-up-button" data-target=' + idea.id + '>Thumbs Up</button>' +
-          '<button class="btn btn-xs btn-warning thumbs-down-button" data-target=' + idea.id + '>Thumbs Down</button>' +
-        '</td>' +
-        '<td><button class="btn btn-danger delete-button" data-target=' + idea.id + '>Delete</button>' +
-        '</tr>');
+      success: function(newIdea){
+        $(".ideas-listing").prepend(displayIdea(newIdea));
         $("#titleTextarea").val("");
         $("#bodyTextarea").val("");
-      },
+       },
       error: function(xhr) {
        console.log(xhr.responseText)
      }
@@ -136,6 +124,4 @@ function displayIdea(idea) {
      }
     });
   })
-
-
 });

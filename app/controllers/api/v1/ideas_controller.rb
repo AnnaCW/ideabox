@@ -21,7 +21,7 @@ class Api::V1::IdeasController < ApiBaseController
   end
 
   def update_params
-    params.permit(:quality)
+    params.permit(:quality, :title, :body)
   end
 
 end
