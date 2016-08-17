@@ -22,6 +22,8 @@ end
 group :development do
   gem 'web-console'
   gem 'listen', '~> 3.0.5'
+  gem 'teaspoon'
+  gem 'teaspoon-mocha'
 end
 
 group :test do
