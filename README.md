@@ -1,24 +1,43 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Ideabox
+## Anna Weisbrodt - Turing - Module 4
 
-Things you may want to cover:
+#### Intro:
+Ideabox is an app for recording ideas. One focus of this project is to provide a fluid and responsive client-side interface using JavaScript and jQuery to implement filtering in the browser, and AJAX to enable inconspicuous communication between client and server.
 
-* Ruby version
+[Project Spec](https://github.com/turingschool/curriculum/blob/master/source/projects/revenge_of_idea_box.markdown)
 
-* System dependencies
+[Production](https://pure-inlet-70337.herokuapp.com/)
 
-* Configuration
+#### Concepts:
 
-* Database creation
+* JavaScript
+* AJAX
+* jQuery
+* Testing JavaScript
+* DOM manipulation
 
-* Database initialization
+#### Platforms:
+* Ruby
 
-* How to run the test suite
+#### Dependencies:
+* Rails 5.0.0
+* jQuery
+* RSpec
+* Capybara
+* Capybara Webkit
+* Teaspoon
+* Factory Girl
+* Bootstrap-Sass
 
-* Services (job queues, cache servers, search engines, etc.)
+#### Setup:
+* Clone the repository
+* ``` cd ideabox ```  
+* ``` bundle ```
+* ``` rake db:setup```
 
-* Deployment instructions
+#### To run the test suite:
 
-* ...
+``` rspec ```
+``` rake teaspoon ```
