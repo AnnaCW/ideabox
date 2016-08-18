@@ -1,4 +1,4 @@
-//=require ideas
+//=require ideas_helpers
 
 describe('trimBody', function(){
   it('truncates string to 100 words', function () {

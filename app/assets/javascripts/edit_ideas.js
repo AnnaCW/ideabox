@@ -33,10 +33,8 @@ function editIdeaTitle() {
                   console.log("updated!");
                   $(".edited-title").removeClass("edited-title");
                   hiddenTitle.toggle("style");
-
                   displayedTitle.show();
                   displayedTitle.text(updatedTitle);
-
 
                   },
                 error: function(xhr) {
@@ -78,8 +76,7 @@ function editIdeaBody() {
                   $(".edited-body").removeClass("edited-body");
                   hiddenBody.toggle("style");
                   displayedBody.show();
-                  displayedBody.text(jQuery.trim(updatedBody).split(" ").slice(0, 100).join(" "))
-
+                  displayedBody.text(trimBody(updatedBody))
                   },
                 error: function(xhr) {
                     console.log(xhr.responseText)
