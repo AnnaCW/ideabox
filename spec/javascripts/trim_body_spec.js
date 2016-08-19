@@ -1,11 +1,33 @@
 //=require ideas_helpers
 
 describe('trimBody', function(){
-  it('truncates string to 100 words', function () {
-    var string = "string"
-    var long_string = "Narwhal letterpress cold-pressed church-key, mumblecore poutine +1 squid vegan cray tilde. Plaid hella godard flexitarian mlkshk, quinoa PBR&B. Kickstarter ennui try-hard, keffiyeh cred pop-up ethical. Vinyl stumptown food truck, slow-carb cray pitchfork chartreuse twee. YOLO ennui brunch meditation fanny pack, skateboard vinyl selfies aesthetic occupy ugh mlkshk viral. Chillwave whatever hashtag +1 swag, pinterest put a bird on it fixie fashion axe dreamcatcher pop-up truffaut mumblecore. Post-ironic cardigan organic food truck, banjo brunch polaroid jean shorts. You probably haven't heard of them neutra cronut, keytar vegan tote bag biodiesel fashion axe bespoke fap mumblecore stumptown typewriter YOLO skateboard. Slow-carb next level cardigan sriracha, kickstarter semiotics ugh shabby chic offal keytar. Marfa asymmetrical cold-pressed, meditation slow-carb irony pour-over salvia. You probably haven't heard of them dreamcatcher small batch, knausgaard mustache chambray tilde VHS fingerstache. Offal intelligentsia single-origin coffee pork belly helvetica blue bottle, waistcoat kogi. Venmo craft beer artisan letterpress kinfolk neutra. Kogi helvetica fixie small batch master cleanse occupy, poutine meditation brunch tofu knausgaard thundercats."
+  it('truncates string to 100 characters', function () {
+    var long_string = "Biodiesel shoreditch quinoa selvage. Migas franzen chambray plaid, typewriter pabst kombucha meh yr bushwick. Kogi stumptown church-key small batch occupy. Literally church-key stumptown, deep v shabby chic typewriter thundercats pickled street art VHS."
+    assert.equal(long_string.length, 253);
+    expect(trimBody(long_string)).to.have.length.of.at.most(100);
+  });
 
-    assert.equal(long_string.split(" ").length, 165);
-    assert.equal((trimBody(long_string).split(" ")).length, 100);
+  it ('does not truncate string shorter than 100 characters', function () {
+    var string = "string"
+    assert.equal((trimBody(string)).length, 6);
+  });
+
+  it ('handles empty string', function () {
+    var empty_string = ""
+    assert.equal((trimBody(empty_string)).length, 0);
+  });
+
+  it ('rounds to nearest word', function () {
+    var string = "Migas franzen chambray plaid, typewriter pabst beer" +
+    "meh bushwick kogi stumptown craft brew awesome sauce."
+
+    var string_trimmed_to_100 = "Migas franzen chambray plaid, typewriter pabst beer" +
+    "meh bushwick kogi stumptown craft brew awesome sa"
+
+    assert.equal(string.length, 104);
+    assert.equal(string_trimmed_to_100.length, 100);
+
+    assert.equal(trimBody(string), "Migas franzen chambray plaid, typewriter pabst beer" +
+    "meh bushwick kogi stumptown craft brew awesome");
   });
 });

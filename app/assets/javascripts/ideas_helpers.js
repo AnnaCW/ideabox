@@ -14,9 +14,12 @@ function removeIdeaFromDOM(idea){
   $(idea).remove()
 }
 
-function trimBody(body){
-  return jQuery.trim(body).split(" ").slice(0, 100).join(" ")
-}
+  function trimBody(body) {
+      var short = body.substr(0, 100);
+        if (/^\S/.test(body.substr(100)))
+            return short.replace(/\s+\S*$/, "");
+        return short;
+  }
 
 function displayIdea(idea) {
   return $('<tr class=form-group id=' + idea.id + '>' +
