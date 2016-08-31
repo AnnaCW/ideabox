@@ -1,27 +1,24 @@
 $(document).ready(function(){
-   $.when(editIdeaTitle())
-   $.when(editIdeaBody())
-})
+  $.when(editIdeaTitle());
+  $.when(editIdeaBody());
+});
 
 function editIdeaTitle() {
   $('.ideas-listing').on('click', '.title', function(e) {
     $('.ideas-listing').off('click', '.title');
       var ideaTitle = $(this).parent().find(".title").text();
+      var displayedTitle = $(this).parent().find(".title");
+      var hiddenTitleTextArea = $(this).parent().find(".hidden-title").find("textarea");
+      var hiddenTitle = $(this).parent().find(".hidden-title");
 
-       var displayedTitle = $(this).parent().find(".title");
-       var hiddenTitleTextArea = $(this).parent().find(".hidden-title").find("textarea");
-
-       var hiddenTitle = $(this).parent().find(".hidden-title");
-       hiddenTitleTextArea.addClass("edited-title");
-       hiddenTitle.toggle("style");
-       displayedTitle.hide();
+      hiddenTitleTextArea.addClass("edited-title");
+      hiddenTitle.toggle("style");
+      displayedTitle.hide();
 
       $(".ideas-listing").on('click', function(event) {
         if(!$(event.target).is(".edited-title") ) {
-
           var ideaId = $(".edited-title").parent().parent().attr("id");
           var updatedTitle = $(".edited-title").val();
-
           var data = { title: updatedTitle };
 
             $.ajax({
@@ -36,15 +33,15 @@ function editIdeaTitle() {
                   displayedTitle.show();
                   displayedTitle.text(updatedTitle);
 
-                  },
+                },
                 error: function(xhr) {
-                    console.log(xhr.responseText)
-                  }
-             });
-        }
-    })
-  })
- }
+                    console.log(xhr.responseText);
+                }
+            });
+       }
+    });
+  });
+}
 
 function editIdeaBody() {
   $('.ideas-listing').on('click', '.body', function() {
@@ -52,7 +49,7 @@ function editIdeaBody() {
       var ideaBody = $(this).parent().find(".full-body").text();
       var displayedBody = $(this).parent().find(".body");
       var hiddenBodyTextArea = $(this).parent().find(".full-body").find("textarea");
-      var hiddenBody = $(this).parent().find(".full-body")
+      var hiddenBody = $(this).parent().find(".full-body");
 
       hiddenBodyTextArea.addClass("edited-body");
       hiddenBody.toggle("style");
@@ -60,10 +57,8 @@ function editIdeaBody() {
 
       $(".ideas-listing").on('click', function(event) {
         if(!$(event.target).is(".edited-body") ) {
-
           var ideaId = $(".edited-body").parent().parent().attr("id");
           var updatedBody = $(".edited-body").val();
-
           var data = { body: updatedBody };
 
             $.ajax({
@@ -76,13 +71,13 @@ function editIdeaBody() {
                   $(".edited-body").removeClass("edited-body");
                   hiddenBody.toggle("style");
                   displayedBody.show();
-                  displayedBody.text(trimBody(updatedBody))
-                  },
+                  displayedBody.text(trimBody(updatedBody));
+                },
                 error: function(xhr) {
-                    console.log(xhr.responseText)
-                  }
+                    console.log(xhr.responseText);
+                }
              });
-        }
-    })
-   })
-  }
+      }
+    });
+  });
+}
