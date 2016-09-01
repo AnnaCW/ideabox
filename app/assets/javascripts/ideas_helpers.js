@@ -11,7 +11,7 @@ function deleteIdea(ideaId, idea){
 
 function removeIdeaFromDOM(idea){
   console.log("successfully deleted");
-  $(idea).remove()
+  $(idea).remove();
 }
 
   function trimBody(body) {
@@ -34,4 +34,4 @@ function displayIdea(idea) {
   '</td>' +
   '<td><button class="btn btn-danger delete-button" data-target=' + idea.id + '>Delete</button>' +
   '</tr>');
-};
+}
